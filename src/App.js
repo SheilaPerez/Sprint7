@@ -21,20 +21,37 @@ function App() {
     }
   }
 
-  const handleExtraPags = (numPags) => {
-    setPags(numPags);
+  const handlePlusPageBtn = () => {
+      setPags(pags + 1);
   }
 
-  const handleExtraLanguages = (numLanguages) => {
-    setLanguages(numLanguages);
+  const handleRestPageButton = () => {
+    if (pags > 0) {
+      setPags(pags - 1);
+    }
+  }
+
+  const handleSumLanguBtn = () => {
+    setLanguages(languages + 1);
+  }
+
+  const handleRestLanguageButton = () => {
+    if (languages > 0) {
+      setLanguages(languages - 1);
+    }
   }
 
   const printPrice = () => {
     return price + (pags * 30) + (languages * 30);
   }
 
+  const writePages = (event) => {
+    setPags(event);
+  }
 
-
+  const writeLanguage = (event) => {
+    setLanguages(event);
+  }
   return (
     <Fragment>
       <p>Que vols fer?</p>
@@ -42,7 +59,8 @@ function App() {
         <div>
           <input type="checkbox" checked={webChecked} onChange={e => prices(500, e.target.checked, setWebChecked(e.target.checked))}></input>
           <TextCheck>Una pàgina web - 500e</TextCheck>
-          {webChecked ? <PanellWeb pages={handleExtraPags} languages={handleExtraLanguages}></PanellWeb> : false}
+          {webChecked ? <PanellWeb handlePlusPageButton={handlePlusPageBtn} valorPags={pags} handleRestPageBtn={handleRestPageButton} handleChangePags={e => writePages(e.target.value)}
+            handleSumLanguButton={handleSumLanguBtn} valorLanguage={languages} handleRestLanguageBtn={handleRestLanguageButton} handleChangeLanguage={e => writeLanguage(e.target.value)}></PanellWeb> : false}
         </div>
         <div>
           <input type="checkbox" checked={consuChecked} onChange={e => prices(300, e.target.checked, setConsuChecked(e.target.checked))}></input>
