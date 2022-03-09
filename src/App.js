@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { TextCheck } from './styled/styles';
 import { PanellWeb } from './styled/panell'
 
@@ -11,7 +11,21 @@ function App() {
   const [pags, setPags] = useState(0);
   const [languages, setLanguages] = useState(0);
 
-  console.log(webChecked)
+  useEffect(() => {
+    setWebChecked(JSON.parse(localStorage.getItem('web')));
+    setConsuChecked(JSON.parse(localStorage.getItem('consultoria')));
+    setAdsChecked(JSON.parse(localStorage.getItem('ads')));
+    setPags(JSON.parse(localStorage.getItem('paginas')));
+    setLanguages(JSON.parse(localStorage.getItem('lenguage')));
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('web', webChecked);
+    localStorage.setItem('consultoria', consuChecked);
+    localStorage.setItem('ads', adsChecked);
+    localStorage.setItem('paginas', pags);
+    localStorage.setItem('lenguage', languages);
+  }, [pags,languages, webChecked, consuChecked, adsChecked]);
 
   const prices = (value, checked) => {
     if (checked) {
@@ -54,7 +68,7 @@ function App() {
   }
   return (
     <Fragment>
-      <p>Que vols fer?</p>
+      <p>Que vols fer?</p> 
       <form>
         <div>
           <input type="checkbox" checked={webChecked} onChange={e => prices(500, e.target.checked, setWebChecked(e.target.checked))}></input>

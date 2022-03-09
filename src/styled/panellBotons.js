@@ -6,11 +6,9 @@ export const PanellWebButons = ({handleClickSum, pagsValue, handleClickRest, lan
 
     return (
         <>
-            <inputChangeNums>
-                <InputBtns type='button' onClick={handleClickSum}>+</InputBtns>
-                <NumInput value={pagsValue | languageValue} type='text' onChange={handleChange}></NumInput>
-                <InputBtns type='button' onClick={handleClickRest}>-</InputBtns>
-            </inputChangeNums> 
+            <InputBtns type='button' onClick={handleClickSum}>+</InputBtns>
+            <NumInput value={pagsValue | languageValue} type='text' onChange={handleChange}></NumInput>
+            <InputBtns type='button' onClick={handleClickRest}>-</InputBtns>
         </>
     )
 }
