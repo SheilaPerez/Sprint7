@@ -20,11 +20,12 @@ const NumInput = styled.input`
 `
 
 const InputBtns = styled.button`
-    background-color: purple;
+    background-color: #789395;
     font-size: 22px;
     color: white;
     width: 15%;
     margin: 0px 5px 0px 15px;
     border-radius: 20px;
     border: none;
+    cursor:pointer;
 `

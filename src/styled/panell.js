@@ -4,7 +4,6 @@ import { PanellWebButons } from './panellBotons'
 
 export const PanellWeb = ({valorPags, handlePlusPageButton, handleRestPageBtn, valorLanguage ,handleSumLanguButton, handleRestLanguageBtn, handleChangePags, handleChangeLanguage}) => {
 
-
     return (
         <BorderBox>
             <div>
@@ -14,7 +13,6 @@ export const PanellWeb = ({valorPags, handlePlusPageButton, handleRestPageBtn, v
             <div>
                 <InputText>Número idiomes</InputText>
                 <PanellWebButons handleClickSum={handleSumLanguButton} languageValue={valorLanguage} handleClickRest={handleRestLanguageBtn} handleChange={handleChangeLanguage}></PanellWebButons>  
-                
             </div>
         </BorderBox>
     )
