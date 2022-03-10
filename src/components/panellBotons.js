@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+import Btnpopup from './btnpopup';
 
-export const PanellWebButons = ({handleClickSum, pagsValue, handleClickRest, languageValue, handleChange}) => {
-
-
+export const PanellWebButons = ({handleClickSum, pagsValue, handleClickRest, languageValue, handleChange, clickOpen}) => {
     return (
         <>
             <InputBtns type='button' onClick={handleClickSum}>+</InputBtns>
             <NumInput value={pagsValue | languageValue} type='text' onChange={handleChange}></NumInput>
             <InputBtns type='button' onClick={handleClickRest}>-</InputBtns>
+            <Btnpopup handleClickOpen={clickOpen}></Btnpopup>
         </>
     )
 }

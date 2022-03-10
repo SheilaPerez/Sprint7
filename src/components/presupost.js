@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { TextCheck } from '../styled/styles';
-import { PanellWeb } from '../styled/panell';
+import { PanellWeb } from './panell';
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
+import Popup from './popup';
 
 function Presupost() : Element {
   const [webChecked, setWebChecked] = useState(false);
@@ -11,6 +11,7 @@ function Presupost() : Element {
   const [price, setPrice] = useState(0);
   const [pags, setPags] = useState(0);
   const [languages, setLanguages] = useState(0);
+  const [openPopup, setOpenPopup] = useState(null);
 
   useEffect(() => {
     setWebChecked(JSON.parse(localStorage.getItem('web')));
@@ -69,6 +70,19 @@ function Presupost() : Element {
   const writeLanguage = (event) => {
     setLanguages(event);
   }
+
+  const handleClickOpenPage = () => {
+    setOpenPopup('page');
+  }
+
+  const handleClickOpenLanguage = () => {
+    setOpenPopup('language');
+  }
+
+  const closePopup = () => {
+    setOpenPopup(null);
+  }
+
   return (
     <DivApp>
         <h3>Que vols fer?</h3> 
@@ -76,8 +90,16 @@ function Presupost() : Element {
             <div>
                 <input type="checkbox" checked={webChecked} onChange={e => prices(500, e.target.checked, setWebChecked(e.target.checked))}></input>
                 <TextCheck>Una pàgina web - 500e</TextCheck>
-                {webChecked ? <PanellWeb handlePlusPageButton={handlePlusPageBtn} valorPags={pags} handleRestPageBtn={handleRestPageButton} handleChangePags={e => writePages(e.target.value)}
-                handleSumLanguButton={handleSumLanguBtn} valorLanguage={languages} handleRestLanguageBtn={handleRestLanguageButton} handleChangeLanguage={e => writeLanguage(e.target.value)}></PanellWeb> : false}
+          {webChecked ? <PanellWeb handlePlusPageButton={handlePlusPageBtn}
+            valorPags={pags}
+            handleRestPageBtn={handleRestPageButton}
+            handleChangePags={e => writePages(e.target.value)}
+            clickOpenPage={handleClickOpenPage}
+            handleSumLanguButton={handleSumLanguBtn}
+            valorLanguage={languages}
+            handleRestLanguageBtn={handleRestLanguageButton}
+            handleChangeLanguage={e => writeLanguage(e.target.value)}
+            clickOpenLanguage={handleClickOpenLanguage}></PanellWeb> : false}
             </div>
             <div>
                 <input type="checkbox" checked={consuChecked} onChange={e => prices(300, e.target.checked, setConsuChecked(e.target.checked))}></input>
@@ -91,7 +113,9 @@ function Presupost() : Element {
         <p>Preu: {printPrice()} Euros</p>
         <StartBtn>
             <StyledLink to="/">Torna enrere...</StyledLink>
-        </StartBtn>  
+      </StartBtn> 
+      {openPopup !== null ? <Popup type={openPopup} valorPags={pags} valorLanguage={languages} handleClickClose={closePopup}></Popup> : false}
+      
     </DivApp>         
   );
 
@@ -117,6 +141,10 @@ const StyledLink = styled(Link)`
     &:hover {
         color: white;
     }
+`
+
+const TextCheck = styled.p`
+    display: inline-block;
 `
 
 export default Presupost;

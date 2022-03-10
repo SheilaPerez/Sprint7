@@ -1,7 +1,8 @@
 import React from 'react';
 import Presupost from './components/presupost';
 import Inici from './components/inici';
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
+
 function App() { 
   return (
     <Router>
