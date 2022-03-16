@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { PanellWeb } from './panell';
+import PanellWeb from './panell';
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
 import Popup from './popup';
+import Client from './client';
 
 function Presupost() : Element {
   const [webChecked, setWebChecked] = useState(false);
@@ -33,41 +34,47 @@ function Presupost() : Element {
 
   const prices = (value, checked) => {
     if (checked) {
-      setPrice(value + price);
+      const priceWithoutExtra = value + price;
+      const priceWithExtra = priceWithoutExtra + (pags * 30) + (languages * 30)
+      setPrice(priceWithExtra);
     } else {
-      setPrice(price - value);
+      const priceWithoutExtra = price - value;
+      const priceWithExtra = priceWithoutExtra + (pags * 30) + (languages * 30)
+      setPrice(priceWithExtra);
     }
   }
 
   const handlePlusPageBtn = () => {
-      setPags(pags + 1);
+    setPags(pags + 1);
+    setPrice(price + 30);
   }
 
   const handleRestPageButton = () => {
     if (pags > 0) {
       setPags(pags - 1);
+      setPrice(price - 30);
     }
   }
 
   const handleSumLanguBtn = () => {
     setLanguages(languages + 1);
+    setPrice(price + 30);
   }
 
   const handleRestLanguageButton = () => {
     if (languages > 0) {
       setLanguages(languages - 1);
+      setPrice(price - 30);
     }
   }
 
-  const printPrice = () => {
-    return price + (pags * 30) + (languages * 30);
-  }
-
   const writePages = (event) => {
+    setPrice((price - (pags * 30)) + (event * 30));
     setPags(event);
   }
 
   const writeLanguage = (event) => {
+    setPrice((price - (languages * 30)) + (event * 30));
     setLanguages(event);
   }
 
@@ -84,6 +91,7 @@ function Presupost() : Element {
   }
 
   return (
+    <>
     <DivApp>
         <h3>Que vols fer?</h3> 
         <form>
@@ -110,30 +118,33 @@ function Presupost() : Element {
                 <TextCheck>Una campanya de Google Ads - 200e</TextCheck>
             </div>
         </form>
-        <p>Preu: {printPrice()} Euros</p>
+        <p>Preu: {price} Euros</p>
         <StartBtn>
             <StyledLink to="/">Torna enrere...</StyledLink>
-      </StartBtn> 
-      {openPopup !== null ? <Popup type={openPopup} valorPags={pags} valorLanguage={languages} handleClickClose={closePopup}></Popup> : false}
+        </StartBtn> 
+        {openPopup !== null ? <Popup type={openPopup} valorPags={pags} valorLanguage={languages} handleClickClose={closePopup}></Popup> : false}
       
-    </DivApp>         
+      </DivApp>
+      <Client web={webChecked} pags={pags} languages={languages} consultoria={consuChecked} ads={adsChecked} price={price}></Client>
+    </>  
   );
 
 }
 
 const DivApp = styled.div`
-margin: 40px;
+  margin: 40px;
+  display: inline-block;
 `
 
 const StartBtn = styled.button` 
-background-color: #E5E3C9;
-margin-top: 30px;
-padding: 15px;
-border-radius: 10px;
-border: none;
-&:hover {
-    background-color: #789395;
-}
+  background-color: #E5E3C9;
+  margin-top: 30px;
+  padding: 15px;
+  border-radius: 10px;
+  border: none;
+  &:hover {
+      background-color: #789395;
+  }
 `
 const StyledLink = styled(Link)`
     color: black;

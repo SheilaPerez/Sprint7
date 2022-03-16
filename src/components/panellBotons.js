@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Btnpopup from './btnpopup';
 
-export const PanellWebButons = ({handleClickSum, pagsValue, handleClickRest, languageValue, handleChange, clickOpen}) => {
+const PanellWebButons = ({handleClickSum, pagsValue, handleClickRest, languageValue, handleChange, clickOpen}) => {
     return (
         <>
             <InputBtns type='button' onClick={handleClickSum}>+</InputBtns>
@@ -29,3 +29,5 @@ const InputBtns = styled.button`
     border: none;
     cursor:pointer;
 `
+
+export default PanellWebButons;

@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { PanellWebButons } from '../components/panellBotons' 
+import PanellWebButons from '../components/panellBotons' 
 
-export const PanellWeb = ({valorPags, handlePlusPageButton, handleRestPageBtn, valorLanguage ,handleSumLanguButton, handleRestLanguageBtn, handleChangePags, handleChangeLanguage, clickOpenPage, clickOpenLanguage}) => {
+const PanellWeb = ({valorPags, handlePlusPageButton, handleRestPageBtn, valorLanguage ,handleSumLanguButton, handleRestLanguageBtn, handleChangePags, handleChangeLanguage, clickOpenPage, clickOpenLanguage}) => {
 
     return (
         <BorderBox>
@@ -29,6 +29,7 @@ const InputText = styled.p`
     display: inline-block;
 `
 
+export default PanellWeb;
 
 
 
