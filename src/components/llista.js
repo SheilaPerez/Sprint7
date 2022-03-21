@@ -5,9 +5,9 @@ import styled from 'styled-components';
 const Llista = ({ users }) => {
     return (
         <>
-        {users.map((user) => {
+        {users.map((user, userIndex) => {
             return (
-                <div>
+                <div key={userIndex}>
                     <p>{user.date}</p>
                     <NamesDiv>
                         <Names>Pressupost:</Names><NamesInput>{user.budget}</NamesInput>
@@ -15,13 +15,13 @@ const Llista = ({ users }) => {
                     <NamesDiv>
                         <Names>Client:</Names><NamesInput>{user.name}</NamesInput>
                     </NamesDiv>
-                    <p>{user.checks.map((check) => {
+                    <div>{user.checks.map((check, index) => {
                         return (
-                            <>
+                            <span key={index}>
                                 {check}
-                            </>
+                            </span>
                         )
-                    })}</p>
+                    })}</div>
                     <Price>{user.finalPrice} Euros</Price>
                     <hr></hr>
                 </div>

@@ -13,7 +13,6 @@ const PanellWebButons = ({handleClickSum, pagsValue, handleClickRest, languageVa
     )
 }
 
-
 const NumInput = styled.input`
     width: 30px; 
     border: none;

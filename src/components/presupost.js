@@ -142,6 +142,7 @@ const StartBtn = styled.button`
   padding: 15px;
   border-radius: 10px;
   border: none;
+  cursor:pointer;
   &:hover {
       background-color: #789395;
   }
